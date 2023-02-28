@@ -253,3 +253,48 @@ exports.getSingleUser = async (req, res, next) => {
     res.status(500).send(err.message);
   }
 };
+
+//delete user -- admin
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      res.status(404).json({
+        message: `user does not exist with Id: ${req.params.id}`,
+      });
+    }
+
+    await user.remove();
+    res.status(200).json({
+      success: true,
+      message:"user deleted succesfully"
+    });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+// update user Role -- admin
+exports.updateUserRole = async (req, res, next) => {
+  try {
+    const newUserDate = {
+      name: req.body.name,
+      email: req.body.email,
+      role:req.body.role
+    }
+
+        // we will add cloudinary later
+        const user = await User.findByIdAndUpdate(req.user.id, newUserDate, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        });
+
+    res.status(200).json({
+      success: true,
+    user
+    });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};

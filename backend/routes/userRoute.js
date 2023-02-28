@@ -10,6 +10,8 @@ const {
   updateUserProfile,
   getAllUser,
   getSingleUser,
+  updateUserRole,
+  deleteUser,
 } = require("../controllers/userController");
 const { isUserAuthenticated, authorizeRoles } = require("../middlewear/auth");
 
@@ -31,7 +33,7 @@ router.route("/me/update").put(isUserAuthenticated,updateUserProfile)
 router.route("/admins/users").get(isUserAuthenticated,authorizeRoles("admin"),getAllUser)
 
 // get single user
-router.route("/admins/user/:id").get(isUserAuthenticated,authorizeRoles("admin"),getSingleUser)
+router.route("/admins/user/:id").get(isUserAuthenticated,authorizeRoles("admin"),getSingleUser).put(isUserAuthenticated,authorizeRoles("admin"),updateUserRole).delete(isUserAuthenticated,authorizeRoles("admin"),deleteUser)
 // get user details
 router.route("/me").get(isUserAuthenticated,getUserDetails)
 //logout user 
