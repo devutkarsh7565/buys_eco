@@ -111,11 +111,11 @@ exports.createProductReview = async (req, res) => {
     }
     else {
      product.reviews.push(review)
-     product.numOfReviews = product.reviews.length
+     product.numberOfReviews = product.reviews.length
     }
 
     let avg = 0;
-    product.rating = product.reviews.forEach((rev) => {
+    product.ratings = product.reviews.forEach((rev) => {
       avg+=rev.rating;
     })/product.reviews.length;
 
