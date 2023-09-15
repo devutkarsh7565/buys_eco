@@ -3,9 +3,13 @@ import { BsCartFill, BsSearch } from "react-icons/bs";
 
 export interface ISearchAndCartComp {
   variant: "cartPrimary" | "cartSecondary" | "searchPrimary";
+  handleClickCart?: () => void;
 }
 
-const SearchAndCartComp: FC<ISearchAndCartComp> = ({ variant }) => {
+const SearchAndCartComp: FC<ISearchAndCartComp> = ({
+  variant,
+  handleClickCart,
+}) => {
   if (variant === "cartPrimary" || variant === "cartSecondary")
     return (
       <div
@@ -17,7 +21,9 @@ const SearchAndCartComp: FC<ISearchAndCartComp> = ({ variant }) => {
             : ""
         } rounded-full p-3  `}
       >
-        <BsCartFill />
+        <button onClick={handleClickCart}>
+          <BsCartFill />
+        </button>
       </div>
     );
   if (variant === "searchPrimary") {

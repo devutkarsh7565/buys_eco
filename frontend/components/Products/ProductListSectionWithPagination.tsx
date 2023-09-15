@@ -6,7 +6,7 @@ import Pagination from "../Pagination/Pagination";
 
 const ProductListSectionWithPagination = () => {
   const [page, setPage] = useState<number>(1);
-  const { productData } = useFetchConditionalProductsApi(page);
+  const { productData, isPreviousData } = useFetchConditionalProductsApi(page);
   console.log(productData, "data");
 
   const pageCount = Math.round(productData?.productCount / 5);
@@ -17,11 +17,15 @@ const ProductListSectionWithPagination = () => {
         {productData?.product?.map((item: IProduct) => (
           <>
             <ProductCard data={item} />
-            <ProductCard data={item} />
           </>
         ))}
+        <Pagination
+          page={page}
+          setPage={setPage}
+          pageCount={pageCount}
+          isPreviousData={isPreviousData}
+        />
       </div>
-      <Pagination page={page} setPage={setPage} pageCount={pageCount} />
     </>
   );
 };

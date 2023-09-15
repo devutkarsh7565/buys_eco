@@ -2,6 +2,8 @@ import Link from "next/link";
 import React from "react";
 import SearchAndCartComp from "../SearchAndCartComp/SearchAndCartComp";
 import Button from "../Button/Button";
+import { useDispatch } from "react-redux";
+import { toggleDrawer } from "@/features/drawerSlice";
 
 const Header = () => {
   const pagesRoute = [
@@ -18,6 +20,12 @@ const Header = () => {
       routeName: "Contact",
     },
   ];
+
+  const dispatch = useDispatch();
+
+  const handleDrawerToggle = () => {
+    dispatch(toggleDrawer());
+  };
   return (
     <div className="bg-secondary w-full fixed top-0 z-20 flex justify-center">
       <div className=" flex justify-between items-center w-full py-7 px-4  max-w-6xl min-w-6xl border-b border-white">
@@ -37,8 +45,12 @@ const Header = () => {
           ))}
         </div>
         <div className="flex gap-5 h-11">
-          <SearchAndCartComp variant="cartPrimary" />
           <SearchAndCartComp variant="searchPrimary" />
+          <SearchAndCartComp
+            variant="cartPrimary"
+            handleClickCart={handleDrawerToggle}
+          />
+
           <Button variant="primary" title="Get Started" className="px-6" />
         </div>
       </div>

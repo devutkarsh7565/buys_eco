@@ -13,6 +13,10 @@ export const fetchConditionalProductsApi = async (pageParam = 1) => {
   const response = await APIInstance.get(`/products?page=${pageParam}`);
   return response;
 };
+export const searchProductsApi = async (searchParams = "product") => {
+  const response = await APIInstance.get(`/products?keyword=${searchParams}`);
+  return response;
+};
 
 // export const fetchConditionalProductsApi = async () => {
 //   await APIInstance.get("/products")
