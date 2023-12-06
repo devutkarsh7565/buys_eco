@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Currency from "../currency/Currency";
 
 const Card = () => {
   return (
@@ -24,8 +25,8 @@ const Card = () => {
         <div className="border-t border-gray-200 w-full flex justify-between text-black pt-4">
           <h1>Quantity: 1</h1>
           <div className="flex gap-3">
-            <h1>349</h1>
-            <h1>328</h1>
+            <Currency amount={348} className="text-gray-500 line-through " />
+            <Currency amount={368} />
           </div>
         </div>
       </div>
