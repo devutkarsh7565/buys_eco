@@ -6,7 +6,8 @@ const crypto = require("crypto");
 //Register a user
 exports.registerUser = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password,role } = req.body;
+
     const user = await User.create({
       name,
       email,

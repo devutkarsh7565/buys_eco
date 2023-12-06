@@ -38,4 +38,10 @@ router
   .get(getProductReviews)
   .delete(isUserAuthenticated, deleteReview);
 
+//create product review 
+router.route("/review").put(isUserAuthenticated,createProductReview);
+
+//get  product all review and delete a review 
+router.route("/reviews").get(getProductReviews).delete(isUserAuthenticated,deleteReview);
+
 module.exports = router;
