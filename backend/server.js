@@ -1,6 +1,7 @@
 const app = require("./app");
 const dotenv = require("dotenv");
 const connectDatabase = require("./config/database");
+const cors = require("cors");
 
 //handling uncaught exception
 process.on("uncaughtException", (err) => {
@@ -19,7 +20,6 @@ connectDatabase();
 const server = app.listen(process.env.PORT, () => {
   console.log(`server starts at ${process.env.PORT}`);
 });
-
 
 // console.log(youtube);
 

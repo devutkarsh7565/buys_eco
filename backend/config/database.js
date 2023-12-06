@@ -5,19 +5,23 @@ const mongoose = require("mongoose");
 
 // app.use(bodyParser.urlencoded({extended:false}))
 // app.use(express.json())
+// zxlClqBKcurlxj1s
+// utkarshtiwari200389
 
 const connectDatabase = () => {
   // Mongo DB Connections
-  mongoose.connect(process.env.DB_URL, {
+
+  mongoose
+    .connect(process.env.DB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
     .then((response) => {
-      console.log("MongoDB Connection Succeeded.");
+      console.log(`MongoDB Connection Succeeded. ${response.connection.host}`);
     })
-    // .catch((error) => {
-    //   console.log("Error in DB connection: " + error);
-    // });
+    .catch((error) => {
+      console.log("Error in DB connection: " + error);
+    });
 };
 
-module.exports = connectDatabase
+module.exports = connectDatabase;

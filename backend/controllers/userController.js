@@ -6,7 +6,7 @@ const crypto = require("crypto");
 //Register a user
 exports.registerUser = async (req, res) => {
   try {
-    const { name, email, password,role } = req.body;
+    const { name, email, password, role } = req.body;
     const user = await User.create({
       name,
       email,
@@ -131,6 +131,7 @@ exports.resetPassword = async (req, res, next) => {
       .createHash("sha256")
       .update(req.params.token)
       .digest("hex");
+    console.log(resetPasswordToken, "resetpasswordToken");
     const user = await User.findOne({
       resetPasswordToken,
       resetPasswordExpire: { $gt: Date.now() },
@@ -225,17 +226,16 @@ exports.updateUserProfile = async (req, res, next) => {
 
 exports.getAllUser = async (req, res, next) => {
   try {
-    const user = await User.find();
+    const users = await User.find();
 
     res.status(200).json({
       success: true,
-      user,
+      users,
     });
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
-
 
 // get single user - admin
 exports.getSingleUser = async (req, res, next) => {
@@ -268,7 +268,7 @@ exports.deleteUser = async (req, res, next) => {
     await user.remove();
     res.status(200).json({
       success: true,
-      message:"user deleted succesfully"
+      message: "user deleted succesfully",
     });
   } catch (err) {
     res.status(500).send(err.message);
@@ -281,19 +281,19 @@ exports.updateUserRole = async (req, res, next) => {
     const newUserDate = {
       name: req.body.name,
       email: req.body.email,
-      role:req.body.role
-    }
+      role: req.body.role,
+    };
 
-        // we will add cloudinary later
-        const user = await User.findByIdAndUpdate(req.user.id, newUserDate, {
-          new: true,
-          runValidators: true,
-          useFindAndModify: false,
-        });
+    // we will add cloudinary later
+    const user = await User.findByIdAndUpdate(req.user.id, newUserDate, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    });
 
     res.status(200).json({
       success: true,
-    user
+      user,
     });
   } catch (err) {
     res.status(500).send(err.message);

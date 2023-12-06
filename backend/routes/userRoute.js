@@ -24,20 +24,26 @@ router.route("/password/forget").post(forgetPassword);
 router.route("/password/reset/:token").put(resetPassword);
 
 //update Password in dashboard
-router.route("/password/update").put(isUserAuthenticated,updatePassword)
+router.route("/password/update").put(isUserAuthenticated, updatePassword);
 
-// update User Profile 
-router.route("/me/update").put(isUserAuthenticated,updateUserProfile)
+// update User Profile
+router.route("/me/update").put(isUserAuthenticated, updateUserProfile);
 
 // get all users
-router.route("/admins/users").get(isUserAuthenticated,authorizeRoles("admin"),getAllUser)
+router
+  .route("/admin/users")
+  .get(isUserAuthenticated, authorizeRoles("admin"), getAllUser);
 
 // get single user
-router.route("/admins/user/:id").get(isUserAuthenticated,authorizeRoles("admin"),getSingleUser).put(isUserAuthenticated,authorizeRoles("admin"),updateUserRole).delete(isUserAuthenticated,authorizeRoles("admin"),deleteUser)
+router
+  .route("/admin/user/:id")
+  .get(isUserAuthenticated, authorizeRoles("admin"), getSingleUser)
+  .put(isUserAuthenticated, authorizeRoles("admin"), updateUserRole)
+  .delete(isUserAuthenticated, authorizeRoles("admin"), deleteUser);
 // get user details
-router.route("/me").get(isUserAuthenticated,getUserDetails)
-//logout user 
-router.route("/logout").get(logoutUser)
+router.route("/me").get(isUserAuthenticated, getUserDetails);
+//logout user
+router.route("/logout").get(logoutUser);
 //login User
 router.route("/login").post(loginUser);
 
